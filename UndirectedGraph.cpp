@@ -4,8 +4,8 @@
 
 
 
-void UndirectedGraph::addEdge(const std::string &to,
-		const std::string &from, unsigned int cost, unsigned int length){
+void UndirectedGraph::addEdge(const std::string &from,
+		const std::string &to, unsigned int cost, unsigned int length){
 	//Find to and from
 	std::unordered_map<std::string, Vertex*>::const_iterator tempTo = verticies.find(to);
 	std::unordered_map<std::string, Vertex*>::const_iterator tempFrom = vertices.find(from);
@@ -46,6 +46,7 @@ unsigned int totalCostEdge() const{
         totalCost += it->second->totalCostVert();
     }
 
+//NEEDS WORK v
 unsigned int totalLatencyEdge(const std::string &from){
 
     double totalLatency = 0;
@@ -54,4 +55,55 @@ unsigned int totalLatencyEdge(const std::string &from){
         totalLatency += it->second->distance
 }
 
-    void mst();
+UndirectedGraph UndirectedGraph::mst() {
+    
+    UndirectedGraph minGraph;
+    std:priority_queue<Edge, std::vector<Edge>> pq;
+    
+    //Set all vertices to not visited
+    for(auto it=vertices.begin(); it !=vertices.end(); ++it) {
+        it->second->visited = false;
+    }
+    
+    //Set first vertex to visited
+    std:unordered_map<std::string,Vertex*>::const_iterator firstIt = vertices.begin();
+    Vertex* first = firstIt->second;
+    first->visited = true;
+    
+
+    //Push all edges in the first vertex to priorty queue
+    for(auto it=first->edges.begin(); it != first->edges.end(); ++it) {
+        pq.push(it->second);
+    }
+
+    
+    while(!pq.empty()) {
+
+        //Pop the edge with smallest cost
+        Edge edgeTemp = pq.top();
+        pq.pop();
+
+        if(edgeTemp->to->visited != true) {
+            
+            //Set to visited
+            edgeTemp->to->visited = true;
+            
+            //Create edge in the MST
+            minGraph.addEdge(edgeTemp->from->name, edgeTemp->to->name,
+                    edgeTemp.cost, edge.length);
+
+            //Add the new edges to pq
+            for(auto it = edgeTemp->to->edges.begin();
+                    it != edgeTemp->to->edges.end(); ++it) {
+                if(it->second->to->visited == false) pq.push(it->second);
+            }
+            
+
+        }
+        else continue;
+    }
+
+    return minGraph;
+
+
+}
