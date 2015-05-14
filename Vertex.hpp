@@ -22,6 +22,11 @@ class Vertex {
      */
     Vertex(const std::string &name);
     
+    /**
+     * Adds edge cost of all edges on this vertex
+     */
+    double allEdgeCost() const;
+
   private:
 
     /**

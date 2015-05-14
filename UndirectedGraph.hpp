@@ -13,7 +13,7 @@
  * Implements methods for producing a minimum spanning tree of the
  * graph, as well as calculating the total length of the shortest
  * paths between each pair of vertices.
- */
+ */  
 class UndirectedGraph {
   public:
     /**
@@ -27,6 +27,16 @@ class UndirectedGraph {
      */
     ~UndirectedGraph();
     
+    void addEdge(const std::string &from, const std::string &to,
+            unsigned int cost, unsigned int length);
+
+    unsigned int totalEdgeCost() const;
+
+    unsigned int totalDistance(const std::string &from);
+
+    void mst();
+
+
   private:
     /**
      * Comparison functor for use with Dijkstra's algorithm. Allows Vertices
@@ -42,6 +52,7 @@ class UndirectedGraph {
      * Map of vertex name to Vertex.
      */
     std::unordered_map<std::string, Vertex*> vertices;
+    std::unordered_map<std::string, Vertex*> mst_vertices;
 };
 
 #endif

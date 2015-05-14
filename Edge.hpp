@@ -19,7 +19,7 @@ class Edge {
      */
     Edge(Vertex *from, Vertex *to,
             unsigned int cost,
-            unsigned int length);
+            unsigned int length):from(from), to(to), cost(cost), length(length){};
 
     /*
      * Compares this Edge to another Edge. Suitable for
