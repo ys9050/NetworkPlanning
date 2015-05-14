@@ -30,9 +30,9 @@ class UndirectedGraph {
     void addEdge(const std::string &from, const std::string &to,
             unsigned int cost, unsigned int length);
 
-    unsigned int totalEdgeCost() const;
+    unsigned int totalCostEdge() const;
 
-    unsigned int totalDistance(const std::string &from);
+    unsigned int totalLatency(const std::string &from);
 
     void mst();
 

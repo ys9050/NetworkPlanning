@@ -39,8 +39,19 @@ void UndirectedGraph::addEdge(const std::string &to,
 
 }
 
-unsigned int totalEdgeCost() const;
+unsigned int totalCostEdge() const{
+    double totalCost = 0;
 
-    unsigned int totalDistance(const std::string &from);
+	for(auto it = vertices.begin(); it != vectices.end(); ++it){
+        totalCost += it->second->totalCostVert();
+    }
+
+unsigned int totalLatencyEdge(const std::string &from){
+
+    double totalLatency = 0;
+
+    for(auto it = vertices.begin(); it != vertices.end(); ++it){
+        totalLatency += it->second->distance
+}
 
     void mst();
