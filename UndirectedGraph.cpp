@@ -24,8 +24,8 @@ void UndirectedGraph::addEdge(const std::string &from,
 		Vertex *v = new Vertex(from);
 		vertices[from] = v;
 	}
-
-	
+    
+	//Temporary pointer to to and from vertices
 	Vertex *startPoint = vertices.find(from)->second;
 	Vertex *endPoint = vertices.find(to)->second;
  	
@@ -43,17 +43,22 @@ void UndirectedGraph::addEdge(const std::string &from,
  */
 unsigned int UndirectedGraph::totalCost() const{
     unsigned int totalCostt = 0;
-
+    
+    //Adds all cost from each of the vertices
 	for(auto it = vertices.begin(); it != vertices.end(); ++it){
         totalCostt += it->second->totalCostVert();
     }
 
 
-    return totalCostt;
+    return totalCostt/2;
 }
 
-
-
+/**
+ * Returns the total latency of all vertex to all the otehrs
+ * Uses the totalLatency with no argument
+ * to get value of one vertex's total latency
+ * then does this for all, then sum them together.
+ */
 unsigned int UndirectedGraph::totalLatency(const std::string &from) {
    
     //Define infinity and total latency value
@@ -93,17 +98,18 @@ unsigned int UndirectedGraph::totalLatency(const std::string &from) {
         pq.pop();
 
         Vertex* tempVert = tempPair.first;
-
+        //Visit all the unvisted vertices
         if(tempVert->visited == false) {
             tempVert->visited = true;
+            //Put the distance value into a vector of latency
             latVec.push_back(tempVert->distance);
-
+            //If not visited, set the distance to the distance from the start vertex
             for(auto it = tempVert->edges.begin(); it != tempVert->edges.end(); ++it) {
                 unsigned int newLat = 0;
                 Vertex* toTemp = it->second.to;
                 if(toTemp->visited == false){
                     newLat = tempVert->distance + it->second.length;
-
+                    //If new distance value is better, than replace the original
                     if(newLat < toTemp->distance) {
                         toTemp->distance = newLat;
                         pq.push(std::make_pair(toTemp, toTemp->distance));
@@ -112,17 +118,23 @@ unsigned int UndirectedGraph::totalLatency(const std::string &from) {
             }
          } 
     }
-
+    //Add all the latency from start vertex to all vertices together
     for(auto it = latVec.begin(); it != latVec.end(); ++it) totalLat += *it;
-
+    
+    //Return the total latency
     return totalLat;
 }
 
-
+/**
+ * Returns the total latency from one vertex to all the others
+ * The path from one to other vertices take the shortest path
+ * via Dijkstras from the same method with 1 argument
+ */
 unsigned int UndirectedGraph::totalLatency() {
 
     unsigned int totalLatencyVal = 0;
-
+    
+    //add all the vertices totalLatency
     for(auto it = vertices.begin(); it != vertices.end(); ++it){
         totalLatencyVal += totalLatency(it->first);
     }
@@ -130,6 +142,10 @@ unsigned int UndirectedGraph::totalLatency() {
 
 }
 
+/**
+ * Given a UndirectedGraph, returns a minimum spanning tree of that graph.
+ * Uses Prim's
+ */
 UndirectedGraph UndirectedGraph::mst() {
     
     UndirectedGraph minGraph;
@@ -172,15 +188,10 @@ UndirectedGraph UndirectedGraph::mst() {
                     it != edgeTemp.to->edges.end(); ++it) {
                 if(it->second.to->visited == false) pq.push(it->second);
             }
-            
-
         }
-        else continue;
     }
-
+    //Return the min cost graph
     return minGraph;
-
-
 }
 
  

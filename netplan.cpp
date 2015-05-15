@@ -48,11 +48,14 @@ int main(int argc, char **argv) {
         if(!in.good()) break;
         
         //calculate total cost of all possible network links
+        //Used this method, instead of totalCost(), because
+        //this way will be faster
         totalCost += cost;
 
         fullNetwork.addEdge(start, end, cost, latency);
     }
 
+    //All values needed for outputs
     minNetwork = fullNetwork.mst();
     minTotalCost = minNetwork.totalCost();
 	totalCost = fullNetwork.totalCost();
@@ -70,7 +73,6 @@ int main(int argc, char **argv) {
     
     cout << minTotalCost << endl;
     
-
     //Part1 - Part 2
     
     cout << totalCost - minTotalCost << endl;

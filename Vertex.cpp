@@ -11,6 +11,6 @@ unsigned int Vertex::totalCostVert() const {
         totalCost += it->second.cost;
     }
     
-    return totalCost/2;
+    return totalCost;
 }
 // Method implementations here
