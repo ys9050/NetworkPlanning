@@ -119,16 +119,15 @@ unsigned int UndirectedGraph::totalLatency(const std::string &from) {
 }
 
 
-unsigned int UndirectedGraph::totalLatency() const {
+unsigned int UndirectedGraph::totalLatency() {
 
-    /*unsigned int totalLatencyVal = 0;
+    unsigned int totalLatencyVal = 0;
 
     for(auto it = vertices.begin(); it != vertices.end(); ++it){
         totalLatencyVal += totalLatency(it->first);
     }
     return totalLatencyVal;
-*/
-return 0;
+
 }
 
 UndirectedGraph UndirectedGraph::mst() {
@@ -183,7 +182,6 @@ UndirectedGraph UndirectedGraph::mst() {
 
 
 }
-UndirectedGraph::~UndirectedGraph(){
-	delete &vertices;
-} 
+
+ 
 

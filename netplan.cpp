@@ -55,8 +55,8 @@ int main(int argc, char **argv) {
 
     minNetwork = fullNetwork.mst();
     minTotalCost = minNetwork.totalCost();
-
-    totalLat = fullNetwork.totalLatency();
+	totalCost = fullNetwork.totalCost();
+	totalLat = fullNetwork.totalLatency();
     minTotalLat = minNetwork.totalLatency();
 
     //Total cost of building all the possible network links

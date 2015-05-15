@@ -31,7 +31,7 @@ class UndirectedGraph {
     /**
      * Destructs an UndirectedGraph.
      */
-    ~UndirectedGraph();
+    ~UndirectedGraph() {};
     /**
 	 * Creates an edge within the graph, both to and from and from and to
 	 * are created.
@@ -59,7 +59,7 @@ class UndirectedGraph {
 	 * The path from one to other vertices take the shortest path
 	 * via Dijkstras
 	 */
-	unsigned int totalLatency() const;	
+	unsigned int totalLatency();	
 
 	/**
 	 * Given a UndirectedGraph, returns a minimum spanning tree of that graph.
