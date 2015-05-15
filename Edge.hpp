@@ -17,9 +17,8 @@ class Edge {
     /**
      * Constructs an Edge from the given parameters.
      */
-    Edge(Vertex *from, Vertex *to,
-            unsigned int cost,
-            unsigned int length):from(from), to(to), cost(cost), length(length){};
+    Edge(Vertex *from, Vertex *to, unsigned int cost, unsigned int length):
+			from(from), to(to), cost(cost), length(length){}
 
     /*
      * Compares this Edge to another Edge. Suitable for
@@ -28,7 +27,7 @@ class Edge {
      */
     bool operator<(const Edge &right) const;
     
-  private:
+  
     /**
      * Vertex that this Edge originates from.
      */

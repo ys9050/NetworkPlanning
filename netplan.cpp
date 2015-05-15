@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
     }
 
     minNetwork = fullNetwork.mst();
-    minTotalCost = minNetwork.totalCostEdge();
+    minTotalCost = minNetwork.totalCost();
 
     totalLat = fullNetwork.totalLatency();
     minTotalLat = minNetwork.totalLatency();

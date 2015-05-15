@@ -25,9 +25,9 @@ class Vertex {
     /**
      * Adds edge cost of all edges on this vertex
      */
-    double allEdgeCost() const;
+    unsigned int totalCostVert() const;
 
-  private:
+  
 
     /**
      * Name of this Vertex.

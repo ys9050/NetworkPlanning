@@ -1,6 +1,10 @@
 #ifndef UNDIRECTEDGRAPH_HPP
 #define UNDIRECTEDGRAPH_HPP
 
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <limits>
 #include <string>
 #include <unordered_map>
 
@@ -32,9 +36,11 @@ class UndirectedGraph {
     void addEdge(const std::string &from, const std::string &to,
             unsigned int cost, unsigned int length);
 
-    unsigned int totalCostEdge() const;
+    unsigned int totalCost() const;
 
     unsigned int totalLatency(const std::string &from);
+
+	unsigned int totalLatency() const;	
 
     UndirectedGraph mst();
 
