@@ -3,6 +3,9 @@
 
 #include <string>
 #include <unordered_map>
+#include <iostream>
+#include <vector>
+#include <queue>
 
 #include "Edge.hpp"
 
@@ -16,11 +19,12 @@ class Vertex {
     // Graph needs access to Edge map for Dijkstra/Prim algorithms.
     friend class UndirectedGraph;
     
+
   public:
     /**
      * Initialize the Vertex with the given name.
      */
-    Vertex(const std::string &name);
+    Vertex(const std::string &name):name(name) {}
     
     /**
      * Adds edge cost of all edges on this vertex

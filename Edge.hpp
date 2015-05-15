@@ -1,6 +1,10 @@
 #ifndef EDGE_HPP
 #define EDGE_HPP
 
+#include <string>
+#include <unordered_map>
+#include <iostream>
+
 class Vertex;
 
 /**
@@ -17,6 +21,9 @@ class Edge {
     /**
      * Constructs an Edge from the given parameters.
      */
+
+	Edge() {}
+
     Edge(Vertex *from, Vertex *to, unsigned int cost, unsigned int length):
 			from(from), to(to), cost(cost), length(length){}
 

@@ -2,15 +2,15 @@
 #include "Edge.hpp"
 
 /**
- * Adds edge cost of all edges on this vertex
+ * Adds edge cost of all edges cost on this vertex
  */
-unsigned int totalCostVert() const{
-	unsigned int totalCostt = 0;
+unsigned int Vertex::totalCostVert() const {
+	unsigned int totalCost = 0;
 
 	for(auto it = edges.begin(); it != edges.end(); ++it){
-        totalCost += it->second->cost;
+        totalCost += it->second.cost;
     }
     
-    return totalCostt;
+    return totalCost;
 }
 // Method implementations here

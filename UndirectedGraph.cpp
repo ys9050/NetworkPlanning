@@ -2,8 +2,10 @@
 #include "Edge.hpp"
 #include "Vertex.hpp"
 
-
-
+/**
+ * Creates an edge within the graph, both to and from and from and to
+ * are created.
+ */
 void UndirectedGraph::addEdge(const std::string &from,
 		const std::string &to, unsigned int cost, unsigned int length){
 	//Find to and from
@@ -33,6 +35,12 @@ void UndirectedGraph::addEdge(const std::string &from,
 
 }
 
+
+/**
+ * Returns the total cost of the UndirectedGraph
+ * Calculates individual vertices' total cost to create edges
+ * then sum them all
+ */
 unsigned int UndirectedGraph::totalCost() const{
     unsigned int totalCostt = 0;
 
@@ -175,3 +183,7 @@ UndirectedGraph UndirectedGraph::mst() {
 
 
 }
+UndirectedGraph::~UndirectedGraph(){
+	delete &vertices;
+} 
+
