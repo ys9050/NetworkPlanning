@@ -10,20 +10,17 @@ void UndirectedGraph::addEdge(const std::string &from,
 	std::unordered_map<std::string, Vertex*>::const_iterator tempTo = verticies.find(to);
 	std::unordered_map<std::string, Vertex*>::const_iterator tempFrom = vertices.find(from);
 	
+
+    //If to vertex doesn't exist, create one
 	if(tempTo == vertices.end()){
 		Vertex *v = new Vertex(to);
-		Vertex *mst = new Vertex(from);
-		//add
 		verticies[to] = v;
-		mst_vertices[to] = mst_v; 
 	}
 
+    //If from vertex does not exist, create one
 	if(tempFrom == vertices.end()){
 		Vertex *v = new Vertex(from);
-		Vertex *mst_v = new Vertex(from);
-		//add
 		vertices[from] = v;
-		mst_vertices[to] = mst_v;
 	}
 
 	
@@ -39,20 +36,90 @@ void UndirectedGraph::addEdge(const std::string &from,
 
 }
 
-unsigned int totalCostEdge() const{
+unsigned int totalCost() const{
     double totalCost = 0;
 
 	for(auto it = vertices.begin(); it != vectices.end(); ++it){
         totalCost += it->second->totalCostVert();
     }
+    return totalCost;
+}
 
-//NEEDS WORK v
-unsigned int totalLatencyEdge(const std::string &from){
+
+
+unsigned int totalLatency(const std::string &from) {
+   
+    //Define infinity and total latency value
+    const unsinged int infinity = std:numeric_limits<int>::max();
+    unsigned totalLat = 0;
+
+    //Holds mininum value found by Dijkstras Algorithm
+    std::vector<unsigned int> latVec;
+
+    //Set all vertices distance to infinity and visted to false
+    for(auto it=vertices.begin(); it != vertices.end(); ++it) {
+        it->second->distance = infinity;
+        it->second->visited = false;
+    }
+
+    std::priority_queue<vertex*, unsigned int>,
+        std::vector<std::pair<Vertex*, unsigned int >>,
+        DijkstraVertexComparator> pq;
+    
+    //Define vertex we start from
+    Vertex* start = vertices[from];
+
+    //Initialize starting vertex to 0 distance and visited
+    start->distance = 0;
+    start->visited = true;
+    
+    //Push into pq, also set to correect edge lengths in pairs
+    for(auto it = start->edges.begin(); it != start->edgesLat.end(); ++it) {
+        Vertex* temp = it->second->to;
+        temp->distance = e->second->length;
+        pq.push(std::make_pair(to, to->distance));
+    }
+
+
+    while(!pq.empty()) {
+        std::pair<vertex*, unsigned int> tempPair = pq.top();
+        pq.pop();
+
+        Vertex* tempVert = tempPair->first;
+
+        if(tempVert->visited == false) {
+            curr->visited = true;
+            latVec.insert(curr->distance);
+
+            for(auto it = curr->edges.begin(); it != curr->edges.end(); ++it) {
+                unsigned int tempLat = 0;
+                Vertex* to = it->second->to;
+                if(to->visited == false){
+                    newLat = tempVert->distance + it->second.length;
+
+                    if(newLat < to->distance) {
+                        to->distance = newLat;
+                        pq.push(std::make_pair(to, to->distance));
+                    }
+                }
+            }
+         } 
+    }
+
+    for(auto it = latVec.begin(); it != latVec.end(); ++it) totalLat += it;
+
+    return totalLat;
+}
+
+
+unsigned int totalLatency(){
 
     double totalLatency = 0;
 
     for(auto it = vertices.begin(); it != vertices.end(); ++it){
-        totalLatency += it->second->distance
+        totalLatency += this->totalLatency(it->first);
+    }
+    return totalLatency;
 }
 
 UndirectedGraph UndirectedGraph::mst() {

@@ -15,7 +15,9 @@
  * paths between each pair of vertices.
  */  
 class UndirectedGraph {
-  public:
+    friend class Vertex;
+    friend class Edge;
+    public:
     /**
      * Constructs an empty UndirectedGraph with no vertices and
      * no edges.
@@ -34,7 +36,7 @@ class UndirectedGraph {
 
     unsigned int totalLatency(const std::string &from);
 
-    void mst();
+    UndirectedGraph mst();
 
 
   private:
@@ -52,7 +54,6 @@ class UndirectedGraph {
      * Map of vertex name to Vertex.
      */
     std::unordered_map<std::string, Vertex*> vertices;
-    std::unordered_map<std::string, Vertex*> mst_vertices;
 };
 
 #endif

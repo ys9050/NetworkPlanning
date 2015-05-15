@@ -28,19 +28,20 @@ int main(int argc, char **argv) {
     
     // Implementation here
 
-    UndirectedGraph all;
-    UndirectedGraph min;
+    UndirectedGraph fullNetwork;
+    UndirectedGraph minNetwork;
 
     std::string start;
     std::string end;
 
-    double cost;
-    double latency;
-
+    unsigned int cost;
+    unsigned int latency;
+    
     unsigned int totalCost = 0;
-    unsigned int mstCost;
-    unsigned int distanceAll;
-    unsigned int distanceMin;
+    unsigned int minTotalCost;
+
+    unsigned int totalLat;
+    unsigned int minTotalLat;
 
     while(in.good()){
         in >> start >> end >> cost >> latency;
@@ -49,27 +50,42 @@ int main(int argc, char **argv) {
         //calculate total cost of all possible network links
         totalCost += cost;
 
-        all.addEdge(start, end, cost, latency);
-        min.addEdge(start, end, cost, latency);
+        fullNetwork.addEdge(start, end, cost, latency);
     }
+
+    minNetwork = fullNetwork.mst();
+    minTotalCost = minNetwork.totalCostEdge();
+
+    totalLat = fullNetwork.totalLatency();
+    minTotalLat = minNetwork.totalLatency();
 
     //Total cost of building all the possible network links
     //Add all of column three
     
     cout << totalCost << endl;
 
-    //Total cost of building the cheapes network
+    //Total cost of building the cheapest network
     //Create MST where the edges connecting links are chosen on cheepest edge
     //add all edges of the tree
+    
+    cout << minTotalCost << endl;
     
 
     //Part1 - Part 2
     
+    cout << totalCost - minTotalCost << endl;
+
     // The total transit time to send if all of network link was built
-    
+  
+    cout << totalLat << endl;
+
     //Total transit time in minimum
     
+    cout << minTotalLat << endl;
+
     //Part 5 - Part 4
 
+    cout << minTotalLat - totalLat << endl;
+    
     return EXIT_SUCCESS;
-
+}
